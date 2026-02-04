@@ -50,6 +50,6 @@
     ```SQL
     CREATE TABLE courses (
         id INT PRIMARY KEY AUTO_INCREMENT,
-        name VARCHAR(100) NOT NULL
+        name VARCHAR(100) NOT NULL UNIQUE
     );
     ```
