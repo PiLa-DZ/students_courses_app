@@ -31,3 +31,6 @@
         CONSTRAINT check_age CHECK (age >= 18)
     );
     ```
+
+# Step 4 "Create EndPoint API For 'Create New Student'"
+1. **Create Post Method on app.js:** /api/v1/create-new/student
