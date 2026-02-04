@@ -1,0 +1,26 @@
+1. [x] Setup Project and Connect to Database
+2. [x] Create Home EndPoint and Run My Server
+3. [x] "Create Students Table"
+4. [x] "Create EndPoint API For 'Create New Student'"
+5. [x] "Create EndPoint API For 'Get One Student by id'"
+6. [x] "Create EndPoint API For 'Update One Student by id'"
+7. [x] "Create EndPoint API For 'Delete One Student by id'"
+8. [x] "Create Courses Table"
+9. [x] "Create EndPoint API For 'Create New course'"
+10. [x] "Create EndPoint API For 'Get All Courses'"
+11. [x] "Create EndPoint API For 'Update One Course by id'"
+12. [x] "Create EndPoint API For 'Delete One Course by id'"
+13. [x] Fix Bugs on app.js on 'Create New Course' and 'Get All Courses'
+14. [x] Create Junction Table for students and courses
+15. [x] "Create EndPoint API For 'Student Join new course'"
+16. [x] "Create EndPoint API For 'Get Stutent Courses'"
+17. [x] "Create EndPoint API For 'Stutent Exit Courses'"
+18. [x] "Move 'Create New Student' EndPoint Script From app.js to controllers and routes"
+19. [x] "Move 'Get One Student by id' EndPoint Script From app.js to controllers and routes"
+20. [x] "Move 'Update One Student by id' EndPoint Script From app.js to controllers and routes"
+21. [x] "Move 'Delete One Student by id' EndPoint Script From app.js to controllers and routes"
+22. [x] "Move 'Create New Course' EndPoint Script From app.js to controllers and routes"
+23. [x] "Move 'Get All Courses' EndPoint Script From app.js to controllers and routes"
+24. [x] "Fix Wrong Script in 'Step 22' I put 'Create New Course' Script in Wrong file"
+25. [x] "Move 'Update One Course' EndPoint Script From app.js to controllers and routes"
+26. [x] "Move All Taking_Courses EndPoint Script From app.js to controllers and routes"
