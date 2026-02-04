@@ -34,3 +34,6 @@
 
 # Step 4 "Create EndPoint API For 'Create New Student'"
 1. **Create Post Method on app.js:** /api/v1/create-new/student
+
+# Step 5 "Create EndPoint API For 'Get One Student by id'"
+1. **Create Get Method on app.js:** /api/v1/get-one-student
