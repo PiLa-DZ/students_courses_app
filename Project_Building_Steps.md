@@ -123,3 +123,6 @@
 
 # Step 19 "Move 'Delete One Student by id' EndPoint Script From app.js to controllers and routes"
 1. **Move 'Delete One Student by id' EndPoint Script From app.js to controllers and routes"**
+
+# Step 19 "Move 'Create New Course' EndPoint Script From app.js to controllers and routes"
+1. **Move 'Create New Course' EndPoint Script From app.js to controllers and routes"**

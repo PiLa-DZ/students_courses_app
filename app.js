@@ -13,28 +13,8 @@ app.get("/", (req, res) => {
 // "Create EndPoint API For 'Get One Student by id'"
 // "Create EndPoint API For 'Update One Student by id'"
 // "Create EndPoint API For 'Delete One Student by id'"
-app.use("/api/v1/", router);
-
 // "Create EndPoint API For 'Create New course'"
-app.post("/api/v1/create-new-course", async (req, res) => {
-  try {
-    const { name } = req.body;
-    const [checkIfNameExists] = await db.query(
-      "select * from courses where name = ?",
-      [name],
-    );
-    if (checkIfNameExists.length !== 0) {
-      return res.json({ message: "EROOR: Course already exists!!!" });
-    }
-    const query = "insert into courses (name) values (?)";
-    const values = [name];
-    const [result] = await db.query(query, values);
-    res.json(result);
-  } catch (err) {
-    res.json({ message: "Error 500" });
-    console.error("/api/v1/create-new-course", err.message);
-  }
-});
+app.use("/api/v1/", router);
 
 // "Create EndPoint API For 'Get All Courses'"
 app.get("/api/v1/get-all-courses", async (req, res) => {
