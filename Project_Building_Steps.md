@@ -44,3 +44,12 @@
 # Step 7 "Create EndPoint API For 'Delete One Student by id'"
 1. **Create Delete Method on app.js:** /api/v1/delete-one-student/:id
 2. **Check if we have this student with this id** result.affectedRows
+
+# Step 3 "Create Courses Table"
+1. **Create Courses table using mariaDB local terminal**:
+    ```SQL
+    CREATE TABLE courses (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(100) NOT NULL
+    );
+    ```
