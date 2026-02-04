@@ -80,11 +80,11 @@ app.delete("/api/v1/delete-one-student/:id", async (req, res) => {
 app.post("/api/v1/create-new-course", async (req, res) => {
   try {
     const { name } = req.body;
-    const checkIfNameExists = await db.query(
+    const [checkIfNameExists] = await db.query(
       "select * from courses where name = ?",
       [name],
     );
-    if (checkIfNameExists) {
+    if (checkIfNameExists.length !== 0) {
       return res.json({ message: "EROOR: Course already exists!!!" });
     }
     const query = "insert into courses (name) values (?)";
@@ -101,7 +101,7 @@ app.post("/api/v1/create-new-course", async (req, res) => {
 app.get("/api/v1/get-all-courses", async (req, res) => {
   try {
     const query = "select * from courses";
-    const [[result]] = await db.query(query);
+    const [result] = await db.query(query);
     res.json(result);
   } catch (err) {
     res.json({ message: "Error: 5000" });

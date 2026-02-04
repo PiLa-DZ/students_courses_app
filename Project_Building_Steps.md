@@ -65,6 +65,20 @@
 1. **Create Put Method on app.js:** /api/v1/update-one-course/:id
 2. **Check if we have this course with this id:** result.affectedRows
 
-# Step 7 "Create EndPoint API For 'Delete One Course by id'"
+# Step 12 "Create EndPoint API For 'Delete One Course by id'"
 1. **Create Delete Method on app.js:** /api/v1/delete-one-course/:id
 2. **Check if we have this course with this id:** result.affectedRows
+
+# Step 13 Fix Bugs on app.js on 'Create New Course' and 'Get All Courses'
+1. "Create EndPoint API For 'Create New course'"
+    - The Problem:
+        - Any time i try to add new course it's say { message: "EROOR: Course already exists!!!" }
+    - The Solution:
+        - instead `const checkIfNameExists` i do `const [checkIfNameExists]` to select index 0 of array
+        - Instead `if(checkIfNameExists)` i do `if(checkIfNameExists.length !== 0)` to check if array is not empty
+2. "Create EndPoint API For 'Get All Courses'"
+    - The Problem:
+        - Any time i try to get-all-courses it's prinst just first course
+    - The Solution:
+        - You're select first index in first index here `const [[result]] = await db.query(query);` just like this `result[0][0]`
+        - I change it to this `const [result] = await db.query(query);` now it's like this `result[0]`
