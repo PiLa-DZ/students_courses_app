@@ -97,6 +97,18 @@ app.post("/api/v1/create-new-course", async (req, res) => {
   }
 });
 
+// "Create EndPoint API For 'Get All Courses'"
+app.get("/api/v1/get-all-courses", async (req, res) => {
+  try {
+    const query = "select * from courses";
+    const [[result]] = await db.query(query);
+    res.json(result);
+  } catch (err) {
+    res.json({ message: "Error: 5000" });
+    console.error("Error 500, /api/v1/get-all-courses", err.message);
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Server listening on localhost:3000`);
 });

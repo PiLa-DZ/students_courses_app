@@ -57,3 +57,6 @@
 # Step 9 "Create EndPoint API For 'Create New course'"
 1. **Create Post Method on app.js:** /api/v1/create-new-course
 2. **Check if course already exists on app.js:** Search by name in Database
+
+# Step 5 "Create EndPoint API For 'Get All Courses'"
+1. **Create Get Method on app.js:** /api/v1/get-all-courses
