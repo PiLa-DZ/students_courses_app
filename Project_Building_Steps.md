@@ -107,3 +107,10 @@
 # Step 17 "Create EndPoint API For 'Stutent Exit Courses'"
 1. **Create Delete Method on app.js:** /api/v1/student-exit-course
 2. **Check if we have this taking_courses with this (student_id, course_id):** `if (checkIfTakingCourseExists.length === 0)`
+
+# Step 18 "Move 'Create New Student' EndPoint Script From app.js to controllers and routes"
+1. **Create controllers directory:** mkdir controllers
+2. **Create students_controller file:** touch controllers/students_controller.js
+3. **Create routes directory:** mkdir routes
+4. **Create students_routes file:** touch routes/students_routes.js
+5. **Move 'Create New Student' EndPoint Script From app.js to controllers and routes"**
