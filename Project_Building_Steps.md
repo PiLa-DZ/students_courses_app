@@ -1,4 +1,4 @@
-# Stape 1
+# Stap 1
 1. **Create project directory:** mkdir students_courses_app
 2. **Create Git:** git init
 3. **Create package.json:** npm init -y
@@ -13,3 +13,7 @@
 12. **Add gitignore and node_module directory to gitignore:** touch .gitignore
 13. **Create Github repo:**
 14. **Push local git to my Githup repo:** git push
+
+# Stap 2
+1. **Create Home endPoint:** /
+2. **Make server listening:** on port 3000
