@@ -149,6 +149,36 @@ app.delete("/api/v1/delete-one-course/:id", async (req, res) => {
   }
 });
 
+// "Create EndPoint API For 'Student Join new course'"
+// **Create Post Method on app.js:** /api/v1/studunt-join-new-course
+app.post("/api/v1/student-join-new-course", async (req, res) => {
+  try {
+    const { student_id, course_id } = req.body;
+    const [checkIfCourseExists] = await db.query(
+      "select * from courses where id = ?",
+      [course_id],
+    );
+    const [checkIfStudentExists] = await db.query(
+      "select * from students where id = ?",
+      [student_id],
+    );
+    if (checkIfCourseExists.length === 0 || checkIfStudentExists.length === 0) {
+      return res.json({
+        message: "EROOR: course_id or student_id not found !!!",
+      });
+    }
+
+    const query =
+      "insert into taking_courses (student_id, course_id) values (?, ?)";
+    const values = [student_id, course_id];
+    const [result] = await db.query(query, values);
+    res.json(result);
+  } catch (err) {
+    res.json({ message: "Error 500" });
+    console.error(`Error: 500 /api/v1/studunt-join-new-course ${err.message}`);
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Server listening on localhost:3000`);
 });

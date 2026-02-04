@@ -94,3 +94,8 @@
         CONSTRAINT fk_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
     );
     ```
+
+# Step 15 "Create EndPoint API For 'Student Join new course'"
+1. **Create Post Method on app.js:** /api/v1/studunt-join-new-course
+2. **check If Course ID Exists:** `checkIfCourseExists.length === 0`
+2. **check If Student ID Exists:** `checkIfStudentExists.length === 0`
