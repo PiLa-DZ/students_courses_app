@@ -64,3 +64,7 @@
 # Step 11 "Create EndPoint API For 'Update One Course by id'"
 1. **Create Put Method on app.js:** /api/v1/update-one-course/:id
 2. **Check if we have this course with this id:** result.affectedRows
+
+# Step 7 "Create EndPoint API For 'Delete One Course by id'"
+1. **Create Delete Method on app.js:** /api/v1/delete-one-course/:id
+2. **Check if we have this course with this id:** result.affectedRows

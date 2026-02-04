@@ -30,3 +30,7 @@ http localhost:3000/api/v1/get-all-courses
 ```Bash
 http put localhost:3000/api/v1/update-one-course/8 name="C++"
 ```
+# Delete One Course By ID
+```Bash
+http delete localhost:3000/api/v1/delete-one-course/15
+```
