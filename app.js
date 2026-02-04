@@ -58,6 +58,24 @@ app.put("/api/v1/update-one-student/:id", async (req, res) => {
   }
 });
 
+// "Create EndPoint API For 'Delete One Student by id'"
+app.delete("/api/v1/delete-one-student/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const query = "delete from students where id = ?";
+    const params = [id];
+    const [result] = await db.query(query, params);
+
+    if (!result.affectedRows) {
+      return res.json({ message: "EROOR: This ID is Wrong!!!" });
+    }
+    res.json({ message: "Delete OK", result: result.affectedRows });
+  } catch (err) {
+    res.json({ message: "Error 500" });
+    console.error("Error 500", err.message);
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Server listening on localhost:3000`);
 });

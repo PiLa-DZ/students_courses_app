@@ -38,5 +38,9 @@
 # Step 5 "Create EndPoint API For 'Get One Student by id'"
 1. **Create Get Method on app.js:** /api/v1/get-one-student:id
 
-# Step 5 "Create EndPoint API For 'Update One Student by id'"
+# Step 6 "Create EndPoint API For 'Update One Student by id'"
 1. **Create Put Method on app.js:** /api/v1/update-one-student/:id
+
+# Step 7 "Create EndPoint API For 'Delete One Student by id'"
+1. **Create Delete Method on app.js:** /api/v1/delete-one-student/:id
+2. **Check if we have this student with this id** result.affectedRows

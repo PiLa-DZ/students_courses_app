@@ -14,3 +14,7 @@ http localhost:3000/api/v1/get-one-student/:id
 ```Bash
 http put localhost:3000/api/v1/update-one-student/1 first_name=a last_name=b user_name=c email=d age:=22
 ```
+# Delete One Student By ID
+```Bash
+http delete localhost:3000/api/v1/delete-one-student/6
+```
