@@ -18,3 +18,7 @@ http put localhost:3000/api/v1/update-one-student/1 first_name=a last_name=b use
 ```Bash
 http delete localhost:3000/api/v1/delete-one-student/6
 ```
+# Create New Course
+```Bash
+(venv) ~ http post localhost:3000/api/v1/create-new-course name=Python
+```

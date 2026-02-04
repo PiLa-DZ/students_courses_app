@@ -76,6 +76,27 @@ app.delete("/api/v1/delete-one-student/:id", async (req, res) => {
   }
 });
 
+// "Create EndPoint API For 'Create New course'"
+app.post("/api/v1/create-new-course", async (req, res) => {
+  try {
+    const { name } = req.body;
+    const checkIfNameExists = await db.query(
+      "select * from courses where name = ?",
+      [name],
+    );
+    if (checkIfNameExists) {
+      return res.json({ message: "EROOR: Course already exists!!!" });
+    }
+    const query = "insert into courses (name) values (?)";
+    const values = [name];
+    const [result] = await db.query(query, values);
+    res.json(result);
+  } catch (err) {
+    res.json({ message: "Error 500" });
+    console.error("/api/v1/create-new-course", err.message);
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Server listening on localhost:3000`);
 });

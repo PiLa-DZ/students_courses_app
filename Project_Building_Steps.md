@@ -33,7 +33,7 @@
     ```
 
 # Step 4 "Create EndPoint API For 'Create New Student'"
-1. **Create Post Method on app.js:** /api/v1/create-new/student
+1. **Create Post Method on app.js:** /api/v1/create-new-student
 
 # Step 5 "Create EndPoint API For 'Get One Student by id'"
 1. **Create Get Method on app.js:** /api/v1/get-one-student:id
@@ -45,7 +45,7 @@
 1. **Create Delete Method on app.js:** /api/v1/delete-one-student/:id
 2. **Check if we have this student with this id** result.affectedRows
 
-# Step 3 "Create Courses Table"
+# Step 8 "Create Courses Table"
 1. **Create Courses table using mariaDB local terminal**:
     ```SQL
     CREATE TABLE courses (
@@ -53,3 +53,7 @@
         name VARCHAR(100) NOT NULL UNIQUE
     );
     ```
+
+# Step 9 "Create EndPoint API For 'Create New course'"
+1. **Create Post Method on app.js:** /api/v1/create-new-course
+2. **Check if course already exists on app.js:** Search by name in Database
