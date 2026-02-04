@@ -139,3 +139,6 @@
 2. **Fix 'Create New Courses' Router:**
     - **The Problem:** I put 'Create New Course' Router in routes/students_routes.js
     - **The Solution:** Move it to routes/courses_routes.js
+
+# Step 25 "Move 'Update One Course' EndPoint Script From app.js to controllers and routes"
+1. **Move 'Update One Course' EndPoint Script From app.js to controllers and routes"**
