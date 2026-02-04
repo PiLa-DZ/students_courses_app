@@ -1,7 +1,7 @@
 import db from "../db.js";
 
 // Create EndPoint API For 'Create New Student'
-const createNewStudent = async (req, res) => {
+export const createNewStudent = async (req, res) => {
   try {
     const { first_name, last_name, user_name, email, age } = req.body;
     const query =
@@ -18,4 +18,18 @@ const createNewStudent = async (req, res) => {
   }
 };
 
-export default createNewStudent;
+// "Create EndPoint API For 'Get One Student by id'"
+export const getOneStudentById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const query = "select * from students where id = ?";
+    const params = [id];
+    const [[result]] = await db.query(query, params);
+    res.json(result);
+  } catch (err) {
+    res.json({ message: "Error 500, Internal Servere Erro" });
+    console.error(
+      `Error 500, Internal Server Error, From /api/v1/get-one-student EndPoint`,
+    );
+  }
+};

@@ -114,3 +114,6 @@
 3. **Create routes directory:** mkdir routes
 4. **Create students_routes file:** touch routes/students_routes.js
 5. **Move 'Create New Student' EndPoint Script From app.js to controllers and routes"**
+
+# Step 19 "Move 'Get One Student by id' EndPoint Script From app.js to controllers and routes"
+1. **Move 'Get One Student by id' EndPoint Script From app.js to controllers and routes"**

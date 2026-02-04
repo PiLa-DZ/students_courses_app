@@ -10,23 +10,8 @@ app.get("/", (req, res) => {
 });
 
 // Create EndPoint API For 'Create New Student'
-app.use("/api/v1/", router);
-
 // "Create EndPoint API For 'Get One Student by id'"
-app.get("/api/v1/get-one-student/:id", async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const query = "select * from students where id = ?";
-    const params = [id];
-    const [[result]] = await db.query(query, params);
-    res.json(result);
-  } catch (err) {
-    res.json({ message: "Error 500, Internal Servere Erro" });
-    console.error(
-      `Error 500, Internal Server Error, From /api/v1/get-one-student EndPoint`,
-    );
-  }
-});
+app.use("/api/v1/", router);
 
 // "Create EndPoint API For 'Update One Student by id'"
 app.put("/api/v1/update-one-student/:id", async (req, res) => {
