@@ -1,4 +1,4 @@
-# Stap 1
+# Stap 1 Setup Project and Connect to Database
 1. **Create project directory:** mkdir students_courses_app
 2. **Create Git:** git init
 3. **Create package.json:** npm init -y
@@ -14,7 +14,7 @@
 13. **Create Github repo:**
 14. **Push local git to my Githup repo:** git push
 
-# Stap 2
+# Stap 2 Create Home EndPoint and Run My Server
 1. **Create Home endPoint:** /
 2. **Make server listening:** on port 3000
 
@@ -36,4 +36,7 @@
 1. **Create Post Method on app.js:** /api/v1/create-new/student
 
 # Step 5 "Create EndPoint API For 'Get One Student by id'"
-1. **Create Get Method on app.js:** /api/v1/get-one-student
+1. **Create Get Method on app.js:** /api/v1/get-one-student:id
+
+# Step 5 "Create EndPoint API For 'Update One Student by id'"
+1. **Create Put Method on app.js:** /api/v1/update-one-student/:id

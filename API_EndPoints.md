@@ -10,3 +10,7 @@ http post localhost:3000/api/v1/create-new-student first_name=Nabil user_name=Na
 ```Bash
 http localhost:3000/api/v1/get-one-student/:id
 ```
+# Update One Student By ID
+```Bash
+http put localhost:3000/api/v1/update-one-student/1 first_name=a last_name=b user_name=c email=d age:=22
+```
