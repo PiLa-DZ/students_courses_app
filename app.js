@@ -179,6 +179,36 @@ app.post("/api/v1/student-join-new-course", async (req, res) => {
   }
 });
 
+// "Create EndPoint API For 'Get Stutent Courses'"
+// **Create Get Method on app.js:** /api/v1/get-student-courses
+app.get("/api/v1/get-student-courses/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    const [checkIfStudentExists] = await db.query(
+      "select * from students where id = ?",
+      [id],
+    );
+    if (checkIfStudentExists.length === 0) {
+      return res.status(400).json({ message: "ERROR: ID not exists!!!" });
+    }
+
+    const query = `
+        select courses.name as Course_Name
+        from students
+        join taking_courses on students.id = taking_courses.student_id
+        join courses on taking_courses.course_id = courses.id
+        where students.id = ?
+      `;
+    const params = [id];
+    const [result] = await db.query(query, params);
+    res.json(result);
+  } catch (err) {
+    res.josn({ message: "Error: 500" });
+    console.error("Error: 500, /api/v1/get-student-courses/:id ", err.message);
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Server listening on localhost:3000`);
 });

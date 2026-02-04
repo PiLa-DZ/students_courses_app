@@ -99,3 +99,7 @@
 1. **Create Post Method on app.js:** /api/v1/studunt-join-new-course
 2. **check If Course ID Exists:** `checkIfCourseExists.length === 0`
 2. **check If Student ID Exists:** `checkIfStudentExists.length === 0`
+
+# Step 16 "Create EndPoint API For 'Get Stutent Courses'"
+1. **Create Get Method on app.js:** /api/v1/get-student-courses
+2. **Check if we have this student with this id:** `if (checkIfStudentExists.length === 0)`

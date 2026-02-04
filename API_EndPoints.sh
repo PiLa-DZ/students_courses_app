@@ -16,3 +16,5 @@ http localhost:3000/api/v1/get-all-courses
 http put localhost:3000/api/v1/update-one-course/8 name="C++"
 # Student Join New Course
 http post localhost:3000/api/v1/student-join-new-course student_id:=2 course_id:=18
+# Get Student Courses
+http localhost:3000/api/v1/get-student-courses/2
