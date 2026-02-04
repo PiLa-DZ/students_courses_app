@@ -20,9 +20,13 @@ http delete localhost:3000/api/v1/delete-one-student/6
 ```
 # Create New Course
 ```Bash
-(venv) ~ http post localhost:3000/api/v1/create-new-course name=Python
+http post localhost:3000/api/v1/create-new-course name=Python
 ```
 # Get All Courses
 ```Bash
 http localhost:3000/api/v1/get-all-courses
+```
+# Update One Course By ID
+```Bash
+http put localhost:3000/api/v1/update-one-course/8 name="C++"
 ```

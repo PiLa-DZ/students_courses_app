@@ -109,6 +109,24 @@ app.get("/api/v1/get-all-courses", async (req, res) => {
   }
 });
 
+// "Create EndPoint API For 'Update One Course by id'"
+app.put("/api/v1/update-one-course/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { name } = req.body;
+    const query = "update courses set name = ? where id = ?";
+    const params = [name, id];
+    const [result] = await db.query(query, params);
+
+    if (!result.affectedRows) {
+      return res.json({ message: "Wrong ID" });
+    }
+    res.json({ message: `Update OK: ${result.affectedRows}` });
+  } catch (err) {
+    res.json({ message: "Error 500" });
+    console.error("Error 500, /api/v1/update-one-course/:id", err.message);
+  }
+});
 app.listen(3000, () => {
   console.log(`Server listening on localhost:3000`);
 });

@@ -43,7 +43,7 @@
 
 # Step 7 "Create EndPoint API For 'Delete One Student by id'"
 1. **Create Delete Method on app.js:** /api/v1/delete-one-student/:id
-2. **Check if we have this student with this id** result.affectedRows
+2. **Check if we have this student with this id:** result.affectedRows
 
 # Step 8 "Create Courses Table"
 1. **Create Courses table using mariaDB local terminal**:
@@ -58,5 +58,9 @@
 1. **Create Post Method on app.js:** /api/v1/create-new-course
 2. **Check if course already exists on app.js:** Search by name in Database
 
-# Step 5 "Create EndPoint API For 'Get All Courses'"
+# Step 10 "Create EndPoint API For 'Get All Courses'"
 1. **Create Get Method on app.js:** /api/v1/get-all-courses
+
+# Step 11 "Create EndPoint API For 'Update One Course by id'"
+1. **Create Put Method on app.js:** /api/v1/update-one-course/:id
+2. **Check if we have this course with this id:** result.affectedRows
