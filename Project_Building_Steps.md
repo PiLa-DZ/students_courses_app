@@ -142,3 +142,10 @@
 
 # Step 25 "Move 'Update One Course' EndPoint Script From app.js to controllers and routes"
 1. **Move 'Update One Course' EndPoint Script From app.js to controllers and routes"**
+
+# Step 23 "Move All Taking_Courses EndPoint Script From app.js to controllers and routes"
+1. **Create taking_courses_controller file:** touch controllers/taking_courses_controller.js
+2. **Create taking_courses_controller file:** touch routes/taking_courses_controller.js
+3. **Move 'Student Join New Course' EndPoint Script From app.js to controllers and routes"**
+4. **Move 'Get Student Courses' EndPoint Script From app.js to controllers and routes"**
+5. **Move 'Student Exit Course' EndPoint Script From app.js to controllers and routes"**
