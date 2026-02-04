@@ -209,6 +209,33 @@ app.get("/api/v1/get-student-courses/:id", async (req, res) => {
   }
 });
 
+// "Create EndPoint API For 'Stutent Exit Courses'"
+// **Create Delete Method on app.js:** /api/v1/student-exit-course
+app.delete("/api/v1/student-exit-course", async (req, res) => {
+  try {
+    const { student_id, course_id } = req.body;
+
+    const [checkIfTakingCourseExists] = await db.query(
+      "select * from taking_courses where student_id = ? and course_id = ?",
+      [student_id, course_id],
+    );
+    if (checkIfTakingCourseExists.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "ERROR: Taking Course Not Found!!!" });
+    }
+
+    const query =
+      "delete from taking_courses where student_id = ? and course_id = ?";
+    const params = [student_id, course_id];
+    const result = db.query(query, params);
+    res.json(result);
+  } catch (err) {
+    res.json({ message: "Error: 500" });
+    console.error(`Error: 500  /api/v1/student-exit-course ${err.message}`);
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Server listening on localhost:3000`);
 });

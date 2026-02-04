@@ -18,3 +18,5 @@ http put localhost:3000/api/v1/update-one-course/8 name="C++"
 http post localhost:3000/api/v1/student-join-new-course student_id:=2 course_id:=18
 # Get Student Courses
 http localhost:3000/api/v1/get-student-courses/2
+# Student Exit Course
+http delete localhost:3000/api/v1/student-exit-course student_id:=2 course_id:=16

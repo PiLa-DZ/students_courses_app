@@ -103,3 +103,7 @@
 # Step 16 "Create EndPoint API For 'Get Stutent Courses'"
 1. **Create Get Method on app.js:** /api/v1/get-student-courses
 2. **Check if we have this student with this id:** `if (checkIfStudentExists.length === 0)`
+
+# Step 17 "Create EndPoint API For 'Stutent Exit Courses'"
+1. **Create Delete Method on app.js:** /api/v1/student-exit-course
+2. **Check if we have this taking_courses with this (student_id, course_id):** `if (checkIfTakingCourseExists.length === 0)`
