@@ -14,9 +14,9 @@ app.get("/", (req, res) => {
 // "Create EndPoint API For 'Get One Student by id'"
 // "Create EndPoint API For 'Update One Student by id'"
 // "Create EndPoint API For 'Delete One Student by id'"
-// "Create EndPoint API For 'Create New course'"
 app.use("/api/v1/", studentsRouter);
 
+// "Create EndPoint API For 'Create New course'"
 // "Create EndPoint API For 'Get All Courses'"
 app.use("/api/v1/", courserRouter);
 

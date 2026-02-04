@@ -1,9 +1,14 @@
-import { getAllCourses } from "../controllers/courses_controller.js";
+import {
+  createNewCourse,
+  getAllCourses,
+} from "../controllers/courses_controller.js";
 
 import express from "express";
 
 const router = express.Router();
 
+// "Create EndPoint API For 'Create New course'"
+router.post("/create-new-course", createNewCourse);
 // "Create EndPoint API For 'Get All Courses'"
 router.get("/get-all-courses", getAllCourses);
 

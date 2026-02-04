@@ -131,3 +131,11 @@
 2. **Create courses_controller file:** touch controllers/courses_controller.js
 4. **Create courses_routes file:** touch routes/courses_routes.js
 5. **Move 'Get All Courses' EndPoint Script From app.js to controllers and routes"**
+
+# Step 24 "Fix Wrong Script in 'Step 22' I put 'Create New Course' Script in Wrong file"
+1. **Fix 'Create New Courses' Controller:**
+    - **The Problem:** I put 'Create New Course' Script in controllers/students_controller.js
+    - **The Solution:** Move it to controllers/courses_controller.js
+2. **Fix 'Create New Courses' Router:**
+    - **The Problem:** I put 'Create New Course' Router in routes/students_routes.js
+    - **The Solution:** Move it to routes/courses_routes.js

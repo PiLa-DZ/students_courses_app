@@ -1,5 +1,4 @@
 import {
-  createNewCourse,
   createNewStudent,
   deleteOneStudentById,
   getOneStudentById,
@@ -18,7 +17,5 @@ router.get("/get-one-student/:id", getOneStudentById);
 router.put("/update-one-student/:id", updateOneStudentById);
 // "Create EndPoint API For 'Update One Student by id'"
 router.delete("/delete-one-student/:id", deleteOneStudentById);
-// "Create EndPoint API For 'Create New course'"
-router.post("/create-new-course", createNewCourse);
 
 export default router;
