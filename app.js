@@ -19,28 +19,8 @@ app.use("/api/v1/", studentsRouter);
 // "Create EndPoint API For 'Create New course'"
 // "Create EndPoint API For 'Get All Courses'"
 // "Create EndPoint API For 'Update One Course by id'"
-app.use("/api/v1/", courserRouter);
-
 // "Create EndPoint API For 'Delete One Course by id'"
-app.delete("/api/v1/delete-one-course/:id", async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const [checkIfCourseExists] = await db.query(
-      "select * from courses where id = ?",
-      [id],
-    );
-    if (checkIfCourseExists.length === 0) {
-      return res.status(400).json({ message: "ERROR: ID not exists!!!" });
-    }
-    const query = "delete from courses where id = ?";
-    const params = [id];
-    const [result] = await db.query(query, params);
-    res.json({ message: `Delete course OK: ${result.affectedRows}` });
-  } catch (err) {
-    res.status(500).json({ message: "Error: 500" });
-    console.error(`Error: 500, /api/v1/delete-one-course/:id ${err.message}`);
-  }
-});
+app.use("/api/v1/", courserRouter);
 
 // "Create EndPoint API For 'Student Join new course'"
 // **Create Post Method on app.js:** /api/v1/studunt-join-new-course

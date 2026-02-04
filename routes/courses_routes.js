@@ -1,5 +1,6 @@
 import {
   createNewCourse,
+  deleteOneCoruseById,
   getAllCourses,
   updateOneCourseById,
 } from "../controllers/courses_controller.js";
@@ -14,5 +15,7 @@ router.post("/create-new-course", createNewCourse);
 router.get("/get-all-courses", getAllCourses);
 // "Create EndPoint API For 'Update One Course by id'"
 router.put("/update-one-course/:id", updateOneCourseById);
+// "Create EndPoint API For 'Delete One Course by id'"
+router.delete("/delete-one-course/:id", deleteOneCoruseById);
 
 export default router;
