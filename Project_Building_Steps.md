@@ -17,3 +17,17 @@
 # Stap 2
 1. **Create Home endPoint:** /
 2. **Make server listening:** on port 3000
+
+# Step 3 "Create Students Table"
+1. **Create students table using mariaDB local terminal**:
+    ```SQL
+    CREATE TABLE students (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        first_name VARCHAR(100) NOT NULL,
+        last_name VARCHAR(100) default "Student",
+        user_name VARCHAR(100) unique NOT NULL,
+        email VARCHAR(100) unique NOT NULL,
+        age INT NOT NULL,
+        CONSTRAINT check_age CHECK (age >= 18)
+    );
+    ```
