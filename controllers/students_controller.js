@@ -33,3 +33,19 @@ export const getOneStudentById = async (req, res) => {
     );
   }
 };
+
+export const updateOneStudentById = async (req, res) => {
+  try {
+    const { first_name, last_name, user_name, email, age } = req.body;
+    const id = Number(req.params.id);
+    const query =
+      "update students set first_name = ?, last_name = ?, user_name = ?, email = ?, age = ? where id = ?";
+    const values = [first_name, last_name, user_name, email, age, id];
+    await db.query(query, values);
+    const read = await db.query("select * from students where id = ?", [id]);
+    res.json(read[0][0]);
+  } catch (err) {
+    res.json({ message: "Error 500" });
+    console.log(`From /api/v1/update-one-student ${err.message}`);
+  }
+};
