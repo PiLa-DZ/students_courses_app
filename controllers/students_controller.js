@@ -34,6 +34,7 @@ export const getOneStudentById = async (req, res) => {
   }
 };
 
+// "Create EndPoint API For 'Update One Student by id'"
 export const updateOneStudentById = async (req, res) => {
   try {
     const { first_name, last_name, user_name, email, age } = req.body;
@@ -47,5 +48,23 @@ export const updateOneStudentById = async (req, res) => {
   } catch (err) {
     res.json({ message: "Error 500" });
     console.log(`From /api/v1/update-one-student ${err.message}`);
+  }
+};
+
+// "Create EndPoint API For 'Delete One Student by id'"
+export const deleteOneStudentById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const query = "delete from students where id = ?";
+    const params = [id];
+    const [result] = await db.query(query, params);
+
+    if (!result.affectedRows) {
+      return res.json({ message: "EROOR: This ID is Wrong!!!" });
+    }
+    res.json({ message: "Delete OK", result: result.affectedRows });
+  } catch (err) {
+    res.json({ message: "Error 500" });
+    console.error("Error 500", err.message);
   }
 };

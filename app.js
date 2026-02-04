@@ -12,25 +12,8 @@ app.get("/", (req, res) => {
 // Create EndPoint API For 'Create New Student'
 // "Create EndPoint API For 'Get One Student by id'"
 // "Create EndPoint API For 'Update One Student by id'"
-app.use("/api/v1/", router);
-
 // "Create EndPoint API For 'Delete One Student by id'"
-app.delete("/api/v1/delete-one-student/:id", async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const query = "delete from students where id = ?";
-    const params = [id];
-    const [result] = await db.query(query, params);
-
-    if (!result.affectedRows) {
-      return res.json({ message: "EROOR: This ID is Wrong!!!" });
-    }
-    res.json({ message: "Delete OK", result: result.affectedRows });
-  } catch (err) {
-    res.json({ message: "Error 500" });
-    console.error("Error 500", err.message);
-  }
-});
+app.use("/api/v1/", router);
 
 // "Create EndPoint API For 'Create New course'"
 app.post("/api/v1/create-new-course", async (req, res) => {
