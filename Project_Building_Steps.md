@@ -82,3 +82,15 @@
     - The Solution:
         - You're select first index in first index here `const [[result]] = await db.query(query);` just like this `result[0][0]`
         - I change it to this `const [result] = await db.query(query);` now it's like this `result[0]`
+
+# Step 14 Create Junction Table for students and courses
+1. **Create taking_courses table using mariaDB local terminal**:
+    ```SQL
+    CREATE TABLE taking_courses (
+        student_id INT,
+        course_id INT,
+        PRIMARY KEY (student_id, course_id),
+        CONSTRAINT fk_student FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+        CONSTRAINT fk_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+    );
+    ```
