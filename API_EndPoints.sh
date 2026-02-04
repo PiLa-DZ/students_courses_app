@@ -14,6 +14,8 @@ http post localhost:3000/api/v1/create-new-course name=Python
 http localhost:3000/api/v1/get-all-courses
 # Update One Course By ID
 http put localhost:3000/api/v1/update-one-course/8 name="C++"
+# Delete One Course By ID
+http delete localhost:3000/api/v1/delete-one-course/16
 # Student Join New Course
 http post localhost:3000/api/v1/student-join-new-course student_id:=2 course_id:=18
 # Get Student Courses
