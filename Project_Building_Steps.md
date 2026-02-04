@@ -118,11 +118,16 @@
 # Step 19 "Move 'Get One Student by id' EndPoint Script From app.js to controllers and routes"
 1. **Move 'Get One Student by id' EndPoint Script From app.js to controllers and routes"**
 
-# Step 19 "Move 'Update One Student by id' EndPoint Script From app.js to controllers and routes"
+# Step 20 "Move 'Update One Student by id' EndPoint Script From app.js to controllers and routes"
 1. **Move 'Update One Student by id' EndPoint Script From app.js to controllers and routes"**
 
-# Step 19 "Move 'Delete One Student by id' EndPoint Script From app.js to controllers and routes"
+# Step 21 "Move 'Delete One Student by id' EndPoint Script From app.js to controllers and routes"
 1. **Move 'Delete One Student by id' EndPoint Script From app.js to controllers and routes"**
 
-# Step 19 "Move 'Create New Course' EndPoint Script From app.js to controllers and routes"
+# Step 22 "Move 'Create New Course' EndPoint Script From app.js to controllers and routes"
 1. **Move 'Create New Course' EndPoint Script From app.js to controllers and routes"**
+
+# Step 23 "Move 'Get All Courses' EndPoint Script From app.js to controllers and routes"
+2. **Create courses_controller file:** touch controllers/courses_controller.js
+4. **Create courses_routes file:** touch routes/courses_routes.js
+5. **Move 'Get All Courses' EndPoint Script From app.js to controllers and routes"**

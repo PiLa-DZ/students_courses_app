@@ -1,6 +1,7 @@
 import db from "./db.js";
 import express from "express";
-import router from "./routes/students_routes.js";
+import studentsRouter from "./routes/students_routes.js";
+import courserRouter from "./routes/courses_routes.js";
 const app = express();
 
 app.use(express.json());
@@ -14,19 +15,10 @@ app.get("/", (req, res) => {
 // "Create EndPoint API For 'Update One Student by id'"
 // "Create EndPoint API For 'Delete One Student by id'"
 // "Create EndPoint API For 'Create New course'"
-app.use("/api/v1/", router);
+app.use("/api/v1/", studentsRouter);
 
 // "Create EndPoint API For 'Get All Courses'"
-app.get("/api/v1/get-all-courses", async (req, res) => {
-  try {
-    const query = "select * from courses";
-    const [result] = await db.query(query);
-    res.json(result);
-  } catch (err) {
-    res.json({ message: "Error: 5000" });
-    console.error("Error 500, /api/v1/get-all-courses", err.message);
-  }
-});
+app.use("/api/v1/", courserRouter);
 
 // "Create EndPoint API For 'Update One Course by id'"
 app.put("/api/v1/update-one-course/:id", async (req, res) => {
