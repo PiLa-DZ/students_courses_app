@@ -1,0 +1,5 @@
+app.js      — 🏢 (The Office/HQ)
+db.js       — 🏛️ (The Foundation)
+controllers — 🧠 (The Brain/Logic)
+routes      — 🛣️ (The Paths)
+README.md   — 📖 (The Manual)
