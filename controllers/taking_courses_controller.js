@@ -1,8 +1,5 @@
 import db from "../db.js";
 
-// "Create EndPoint API For 'Student Join new course'"
-// **Create Post Method on app.js:** /api/v1/studunt-join-new-course
-// student-join-new-course
 export const studentJoinNewCourse = async (req, res) => {
   try {
     const { student_id, course_id } = req.body;
@@ -19,7 +16,6 @@ export const studentJoinNewCourse = async (req, res) => {
         message: "EROOR: course_id or student_id not found !!!",
       });
     }
-
     const query =
       "insert into taking_courses (student_id, course_id) values (?, ?)";
     const values = [student_id, course_id];
@@ -31,13 +27,9 @@ export const studentJoinNewCourse = async (req, res) => {
   }
 };
 
-// "Create EndPoint API For 'Get Stutent Courses'"
-// **Create Get Method on app.js:** /api/v1/get-student-courses
-// get-student-courses/:id
 export const getStudentCourses = async (req, res) => {
   try {
     const id = Number(req.params.id);
-
     const [checkIfStudentExists] = await db.query(
       "select * from students where id = ?",
       [id],
@@ -45,7 +37,6 @@ export const getStudentCourses = async (req, res) => {
     if (checkIfStudentExists.length === 0) {
       return res.status(400).json({ message: "ERROR: ID not exists!!!" });
     }
-
     const query = `
         select courses.name as Course_Name
         from students
@@ -63,12 +54,9 @@ export const getStudentCourses = async (req, res) => {
 };
 
 // "Create EndPoint API For 'Student Exit Courses'"
-// **Create Delete Method on app.js:** /api/v1/student-exit-course
-// student-exit-course
 export const studentExitCourse = async (req, res) => {
   try {
     const { student_id, course_id } = req.body;
-
     const [checkIfTakingCourseExists] = await db.query(
       "select * from taking_courses where student_id = ? and course_id = ?",
       [student_id, course_id],
@@ -78,7 +66,6 @@ export const studentExitCourse = async (req, res) => {
         .status(400)
         .json({ message: "ERROR: Taking Course Not Found!!!" });
     }
-
     const query =
       "delete from taking_courses where student_id = ? and course_id = ?";
     const params = [student_id, course_id];

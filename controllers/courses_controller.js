@@ -1,6 +1,5 @@
 import db from "../db.js";
 
-// "Create EndPoint API For 'Get All Courses'"
 export const getAllCourses = async (req, res) => {
   try {
     const query = "select * from courses";
@@ -12,7 +11,6 @@ export const getAllCourses = async (req, res) => {
   }
 };
 
-// "Create EndPoint API For 'Create New course'"
 export const createNewCourse = async (req, res) => {
   try {
     const { name } = req.body;
@@ -33,7 +31,6 @@ export const createNewCourse = async (req, res) => {
   }
 };
 
-// "Create EndPoint API For 'Update One Course by id'"
 export const updateOneCourseById = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -52,7 +49,6 @@ export const updateOneCourseById = async (req, res) => {
   }
 };
 
-// "Create EndPoint API For 'Delete One Course by id'"
 export const deleteOneCoruseById = async (req, res) => {
   try {
     const id = Number(req.params.id);
