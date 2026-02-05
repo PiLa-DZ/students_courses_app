@@ -27,6 +27,31 @@ export const createNewCourse = async (req, res) => {
   }
 };
 
+export const updateOneCourseById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { name } = req.body;
+
+    const updatedCourse = await prisma.courses.update({
+      where: { id: id },
+      data: { name },
+    });
+
+    res.json({ message: "Update OK", course: updatedCourse });
+  } catch (err) {
+    if (err.code === "P2025") {
+      return res.status(404).json({ message: "Wrong ID: Course not found" });
+    }
+    if (err.code === "P2002") {
+      return res
+        .status(400)
+        .json({ message: "Error: That course name already exists!" });
+    }
+    console.error("Update Course Error:", err.message);
+    res.status(500).json({ message: "Error 500" });
+  }
+};
+
 /* Old Script: Using Prisma ORM */
 import db from "../db.js";
 
@@ -61,23 +86,23 @@ import db from "../db.js";
 //   }
 // };
 
-export const updateOneCourseById = async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const { name } = req.body;
-    const query = "update courses set name = ? where id = ?";
-    const params = [name, id];
-    const [result] = await db.query(query, params);
-
-    if (!result.affectedRows) {
-      return res.json({ message: "Wrong ID" });
-    }
-    res.json({ message: `Update OK: ${result.affectedRows}` });
-  } catch (err) {
-    res.json({ message: "Error 500" });
-    console.error("Error 500, /api/v1/update-one-course/:id", err.message);
-  }
-};
+// export const updateOneCourseById = async (req, res) => {
+//   try {
+//     const id = Number(req.params.id);
+//     const { name } = req.body;
+//     const query = "update courses set name = ? where id = ?";
+//     const params = [name, id];
+//     const [result] = await db.query(query, params);
+//
+//     if (!result.affectedRows) {
+//       return res.json({ message: "Wrong ID" });
+//     }
+//     res.json({ message: `Update OK: ${result.affectedRows}` });
+//   } catch (err) {
+//     res.json({ message: "Error 500" });
+//     console.error("Error 500, /api/v1/update-one-course/:id", err.message);
+//   }
+// };
 
 export const deleteOneCoruseById = async (req, res) => {
   try {
