@@ -7,10 +7,6 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcom to home page" });
-});
-
 app.use("/api/v1/", studentsRouter);
 app.use("/api/v1/", courserRouter);
 app.use("/api/v1/", takingCoursesRouter);
