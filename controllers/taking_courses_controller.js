@@ -69,7 +69,7 @@ export const studentExitCourse = async (req, res) => {
     const query =
       "delete from taking_courses where student_id = ? and course_id = ?";
     const params = [student_id, course_id];
-    const result = db.query(query, params);
+    const result = await db.query(query, params);
     res.json(result);
   } catch (err) {
     res.json({ message: "Error: 500" });
