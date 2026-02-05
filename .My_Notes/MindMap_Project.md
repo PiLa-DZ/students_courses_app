@@ -1,3 +1,4 @@
+MVC (Model-View-Controller)
 app.js      — 🏢 (The Office/HQ)
 db.js       — 🏛️ (The Foundation)
 controllers — 🧠 (The Brain/Logic)
