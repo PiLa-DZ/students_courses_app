@@ -1,6 +1,33 @@
 /* Now Script: Using Prisma ORM */
 import prisma from "../prisma.js";
 
+export const createNewStudent = async (req, res) => {
+  try {
+    const { first_name, last_name, user_name, email, age } = req.body;
+
+    const newStudent = await prisma.students.create({
+      data: {
+        first_name,
+        last_name,
+        user_name,
+        email,
+        age: Number(age),
+      },
+    });
+
+    res.status(201).json(newStudent);
+  } catch (err) {
+    // Handling Unique Constraint (e.g., user_name or email already exists)
+    if (err.code === "P2002") {
+      return res.status(400).json({
+        message: `ERROR: The ${err.meta.target} is already taken!`,
+      });
+    }
+    console.error("Create Student Error:", err.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const getOneStudentById = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -43,22 +70,22 @@ export const updateOneStudentById = async (req, res) => {
 /* Old Script: Using Prisma ORM */
 import db from "../db.js";
 
-export const createNewStudent = async (req, res) => {
-  try {
-    const { first_name, last_name, user_name, email, age } = req.body;
-    const query =
-      "INSERT INTO students (first_name, last_name, user_name, email, age) VALUES (?, ?, ?, ?, ?)";
-    const values = [first_name, last_name, user_name, email, age];
-    const result = await db.query(query, values);
-    res.json({ message: result });
-  } catch (err) {
-    res.json({ message: "Error 500, Internal Server Error" });
-    console.error(
-      `status 500, Internal server error from /api/v1/create-new-student`,
-      err.message,
-    );
-  }
-};
+// export const createNewStudent = async (req, res) => {
+//   try {
+//     const { first_name, last_name, user_name, email, age } = req.body;
+//     const query =
+//       "INSERT INTO students (first_name, last_name, user_name, email, age) VALUES (?, ?, ?, ?, ?)";
+//     const values = [first_name, last_name, user_name, email, age];
+//     const result = await db.query(query, values);
+//     res.json({ message: result });
+//   } catch (err) {
+//     res.json({ message: "Error 500, Internal Server Error" });
+//     console.error(
+//       `status 500, Internal server error from /api/v1/create-new-student`,
+//       err.message,
+//     );
+//   }
+// };
 
 // export const getOneStudentById = async (req, res) => {
 //   try {
