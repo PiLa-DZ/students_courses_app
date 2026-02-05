@@ -52,8 +52,34 @@ export const updateOneCourseById = async (req, res) => {
   }
 };
 
+export const deleteOneCoruseById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    const result = await prisma.courses.delete({
+      where: { id: id },
+    });
+
+    res.json({ message: `Delete course OK`, deleted: result.name });
+  } catch (err) {
+    if (err.code === "P2025") {
+      return res.status(404).json({ message: "ERROR: ID does not exist!!!" });
+    }
+    // If the course has students, the DB might prevent deletion due to Foreign Keys
+    if (err.code === "P2003") {
+      return res
+        .status(400)
+        .json({
+          message: "Cannot delete: Students are still enrolled in this course!",
+        });
+    }
+    console.error("Delete Course Error:", err.message);
+    res.status(500).json({ message: "Error: 500" });
+  }
+};
+
 /* Old Script: Using Prisma ORM */
-import db from "../db.js";
+// import db from "../db.js";
 
 // export const getAllCourses = async (req, res) => {
 //   try {
@@ -104,22 +130,22 @@ import db from "../db.js";
 //   }
 // };
 
-export const deleteOneCoruseById = async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const [checkIfCourseExists] = await db.query(
-      "select * from courses where id = ?",
-      [id],
-    );
-    if (checkIfCourseExists.length === 0) {
-      return res.status(400).json({ message: "ERROR: ID not exists!!!" });
-    }
-    const query = "delete from courses where id = ?";
-    const params = [id];
-    const [result] = await db.query(query, params);
-    res.json({ message: `Delete course OK: ${result.affectedRows}` });
-  } catch (err) {
-    res.status(500).json({ message: "Error: 500" });
-    console.error(`Error: 500, /api/v1/delete-one-course/:id ${err.message}`);
-  }
-};
+// export const deleteOneCoruseById = async (req, res) => {
+//   try {
+//     const id = Number(req.params.id);
+//     const [checkIfCourseExists] = await db.query(
+//       "select * from courses where id = ?",
+//       [id],
+//     );
+//     if (checkIfCourseExists.length === 0) {
+//       return res.status(400).json({ message: "ERROR: ID not exists!!!" });
+//     }
+//     const query = "delete from courses where id = ?";
+//     const params = [id];
+//     const [result] = await db.query(query, params);
+//     res.json({ message: `Delete course OK: ${result.affectedRows}` });
+//   } catch (err) {
+//     res.status(500).json({ message: "Error: 500" });
+//     console.error(`Error: 500, /api/v1/delete-one-course/:id ${err.message}`);
+//   }
+// };
