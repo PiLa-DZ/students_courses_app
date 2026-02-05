@@ -1,3 +1,40 @@
+/* Now Script: Using Prisma ORM */
+import prisma from "../prisma.js";
+
+export const getStudentCourses = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    // We find the student and "include" their courses through the join table
+    const result = await prisma.students.findUnique({
+      where: { id: id },
+      include: {
+        taking_courses: {
+          include: {
+            courses: true, // This grabs the actual course details (name, etc.)
+          },
+        },
+      },
+    });
+
+    if (!result) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    // Clean up the data so the user just sees a list of names
+    const courseNames = result.taking_courses.map((tc) => tc.courses.name);
+
+    res.json({
+      student: `${result.first_name} ${result.last_name}`,
+      courses: courseNames,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error fetching student courses" });
+  }
+};
+
+/* Old Script: Using Prisma ORM */
 import db from "../db.js";
 
 export const studentJoinNewCourse = async (req, res) => {
@@ -27,31 +64,31 @@ export const studentJoinNewCourse = async (req, res) => {
   }
 };
 
-export const getStudentCourses = async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const [checkIfStudentExists] = await db.query(
-      "select * from students where id = ?",
-      [id],
-    );
-    if (checkIfStudentExists.length === 0) {
-      return res.status(400).json({ message: "ERROR: ID not exists!!!" });
-    }
-    const query = `
-        select courses.name as Course_Name
-        from students
-        join taking_courses on students.id = taking_courses.student_id
-        join courses on taking_courses.course_id = courses.id
-        where students.id = ?
-      `;
-    const params = [id];
-    const [result] = await db.query(query, params);
-    res.json(result);
-  } catch (err) {
-    res.josn({ message: "Error: 500" });
-    console.error("Error: 500, /api/v1/get-student-courses/:id ", err.message);
-  }
-};
+// export const getStudentCourses = async (req, res) => {
+//   try {
+//     const id = Number(req.params.id);
+//     const [checkIfStudentExists] = await db.query(
+//       "select * from students where id = ?",
+//       [id],
+//     );
+//     if (checkIfStudentExists.length === 0) {
+//       return res.status(400).json({ message: "ERROR: ID not exists!!!" });
+//     }
+//     const query = `
+//         select courses.name as Course_Name
+//         from students
+//         join taking_courses on students.id = taking_courses.student_id
+//         join courses on taking_courses.course_id = courses.id
+//         where students.id = ?
+//       `;
+//     const params = [id];
+//     const [result] = await db.query(query, params);
+//     res.json(result);
+//   } catch (err) {
+//     res.josn({ message: "Error: 500" });
+//     console.error("Error: 500, /api/v1/get-student-courses/:id ", err.message);
+//   }
+// };
 
 // "Create EndPoint API For 'Student Exit Courses'"
 export const studentExitCourse = async (req, res) => {
