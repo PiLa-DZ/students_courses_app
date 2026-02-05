@@ -67,6 +67,24 @@ export const updateOneStudentById = async (req, res) => {
   }
 };
 
+export const deleteOneStudentById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    await prisma.students.delete({
+      where: { id: id },
+    });
+
+    res.json({ message: "Student deleted successfully" });
+  } catch (err) {
+    if (err.code === "P2025") {
+      return res.status(404).json({ message: "ERROR: Student ID not found!" });
+    }
+    console.error("Delete Student Error:", err.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 /* Old Script: Using Prisma ORM */
 import db from "../db.js";
 
@@ -118,19 +136,19 @@ import db from "../db.js";
 //   }
 // };
 
-export const deleteOneStudentById = async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const query = "delete from students where id = ?";
-    const params = [id];
-    const [result] = await db.query(query, params);
-
-    if (!result.affectedRows) {
-      return res.json({ message: "EROOR: This ID is Wrong!!!" });
-    }
-    res.json({ message: "Delete OK", result: result.affectedRows });
-  } catch (err) {
-    res.json({ message: "Error 500" });
-    console.error("Error 500", err.message);
-  }
-};
+// export const deleteOneStudentById = async (req, res) => {
+//   try {
+//     const id = Number(req.params.id);
+//     const query = "delete from students where id = ?";
+//     const params = [id];
+//     const [result] = await db.query(query, params);
+//
+//     if (!result.affectedRows) {
+//       return res.json({ message: "EROOR: This ID is Wrong!!!" });
+//     }
+//     res.json({ message: "Delete OK", result: result.affectedRows });
+//   } catch (err) {
+//     res.json({ message: "Error 500" });
+//     console.error("Error 500", err.message);
+//   }
+// };
