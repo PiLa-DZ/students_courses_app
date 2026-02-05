@@ -1,15 +1,28 @@
-import db from "../db.js";
+/* == New Script: Using Prisma ORM == */
+import prisma from "../prisma.js"; // Import the new prisma client
 
 export const getAllCourses = async (req, res) => {
   try {
-    const query = "select * from courses";
-    const [result] = await db.query(query);
+    const result = await prisma.courses.findMany(); // No strings, just objects!
     res.json(result);
   } catch (err) {
-    res.json({ message: "Error: 5000" });
-    console.error("Error 500, /api/v1/get-all-courses", err.message);
+    res.status(500).json({ message: "Error 500" });
   }
 };
+
+/* == Old Script: Using Row SQL == */
+import db from "../db.js";
+
+// export const getAllCourses = async (req, res) => {
+//   try {
+//     const query = "select * from courses";
+//     const [result] = await db.query(query);
+//     res.json(result);
+//   } catch (err) {
+//     res.json({ message: "Error: 5000" });
+//     console.error("Error 500, /api/v1/get-all-courses", err.message);
+//   }
+// };
 
 export const createNewCourse = async (req, res) => {
   try {
