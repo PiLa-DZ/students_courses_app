@@ -11,6 +11,22 @@ export const getAllCourses = async (req, res) => {
   }
 };
 
+export const createNewCourse = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const newCourse = await prisma.courses.create({ data: { name } });
+    res.status(201).json(newCourse);
+  } catch (err) {
+    // Prisma error code for "Unique constraint failed"
+    if (err.code === "P2002") {
+      return res
+        .status(400)
+        .json({ message: "ERROR: Course already exists!!!" });
+    }
+    res.status(500).json({ message: "Error 500" });
+  }
+};
+
 /* Old Script: Using Prisma ORM */
 import db from "../db.js";
 
@@ -25,25 +41,25 @@ import db from "../db.js";
 //   }
 // };
 
-export const createNewCourse = async (req, res) => {
-  try {
-    const { name } = req.body;
-    const [checkIfNameExists] = await db.query(
-      "select * from courses where name = ?",
-      [name],
-    );
-    if (checkIfNameExists.length !== 0) {
-      return res.json({ message: "EROOR: Course already exists!!!" });
-    }
-    const query = "insert into courses (name) values (?)";
-    const values = [name];
-    const [result] = await db.query(query, values);
-    res.json(result);
-  } catch (err) {
-    res.json({ message: "Error 500" });
-    console.error("/api/v1/create-new-course", err.message);
-  }
-};
+// export const createNewCourse = async (req, res) => {
+//   try {
+//     const { name } = req.body;
+//     const [checkIfNameExists] = await db.query(
+//       "select * from courses where name = ?",
+//       [name],
+//     );
+//     if (checkIfNameExists.length !== 0) {
+//       return res.json({ message: "EROOR: Course already exists!!!" });
+//     }
+//     const query = "insert into courses (name) values (?)";
+//     const values = [name];
+//     const [result] = await db.query(query, values);
+//     res.json(result);
+//   } catch (err) {
+//     res.json({ message: "Error 500" });
+//     console.error("/api/v1/create-new-course", err.message);
+//   }
+// };
 
 export const updateOneCourseById = async (req, res) => {
   try {
