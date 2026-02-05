@@ -1,6 +1,43 @@
 /* Now Script: Using Prisma ORM */
 import prisma from "../prisma.js";
 
+export const studentJoinNewCourse = async (req, res) => {
+  try {
+    const { student_id, course_id } = req.body;
+
+    // We simply create a new record in the join table
+    const result = await prisma.taking_courses.create({
+      data: {
+        student_id: Number(student_id),
+        course_id: Number(course_id),
+      },
+    });
+
+    res.status(201).json({
+      message: "Student successfully joined the course!",
+      data: result,
+    });
+  } catch (err) {
+    // P2002: Student is already enrolled (Unique/Composite Key constraint)
+    if (err.code === "P2002") {
+      return res.status(400).json({
+        message: "ERROR: This student is already enrolled in this course!",
+      });
+    }
+
+    // P2003: Foreign Key constraint (Student ID or Course ID doesn't exist)
+    if (err.code === "P2003") {
+      return res.status(404).json({
+        message:
+          "ERROR: Either the Student ID or Course ID does not exist in the database.",
+      });
+    }
+
+    console.error("Enrollment Error:", err.message);
+    res.status(500).json({ message: "Error 500" });
+  }
+};
+
 export const getStudentCourses = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -66,34 +103,34 @@ export const studentExitCourse = async (req, res) => {
 };
 
 /* Old Script: Using Prisma ORM */
-import db from "../db.js";
-
-export const studentJoinNewCourse = async (req, res) => {
-  try {
-    const { student_id, course_id } = req.body;
-    const [checkIfCourseExists] = await db.query(
-      "select * from courses where id = ?",
-      [course_id],
-    );
-    const [checkIfStudentExists] = await db.query(
-      "select * from students where id = ?",
-      [student_id],
-    );
-    if (checkIfCourseExists.length === 0 || checkIfStudentExists.length === 0) {
-      return res.json({
-        message: "EROOR: course_id or student_id not found !!!",
-      });
-    }
-    const query =
-      "insert into taking_courses (student_id, course_id) values (?, ?)";
-    const values = [student_id, course_id];
-    const [result] = await db.query(query, values);
-    res.json(result);
-  } catch (err) {
-    res.json({ message: "Error 500" });
-    console.error(`Error: 500 /api/v1/studunt-join-new-course ${err.message}`);
-  }
-};
+// import db from "../db.js";
+//
+// export const studentJoinNewCourse = async (req, res) => {
+//   try {
+//     const { student_id, course_id } = req.body;
+//     const [checkIfCourseExists] = await db.query(
+//       "select * from courses where id = ?",
+//       [course_id],
+//     );
+//     const [checkIfStudentExists] = await db.query(
+//       "select * from students where id = ?",
+//       [student_id],
+//     );
+//     if (checkIfCourseExists.length === 0 || checkIfStudentExists.length === 0) {
+//       return res.json({
+//         message: "EROOR: course_id or student_id not found !!!",
+//       });
+//     }
+//     const query =
+//       "insert into taking_courses (student_id, course_id) values (?, ?)";
+//     const values = [student_id, course_id];
+//     const [result] = await db.query(query, values);
+//     res.json(result);
+//   } catch (err) {
+//     res.json({ message: "Error 500" });
+//     console.error(`Error: 500 /api/v1/studunt-join-new-course ${err.message}`);
+//   }
+// };
 
 // export const getStudentCourses = async (req, res) => {
 //   try {
