@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model courses {
+  id             Int              @id @default(autoincrement())
+  name           String           @unique(map: "name") @db.VarChar(100)
+  taking_courses taking_courses[]
+}
+
+model students {
+  id             Int              @id @default(autoincrement())
+  first_name     String           @db.VarChar(100)
+  last_name      String?          @default("Student") @db.VarChar(100)
+  user_name      String           @unique(map: "user_name") @db.VarChar(100)
+  email          String           @unique(map: "email") @db.VarChar(100)
+  age            Int
+  taking_courses taking_courses[]
+}
+
+model taking_courses {
+  student_id Int
+  course_id  Int
+  courses    courses  @relation(fields: [course_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_course")
+  students   students @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_student")
+
+  @@id([student_id, course_id])
+  @@index([course_id], map: "fk_course")
+}
