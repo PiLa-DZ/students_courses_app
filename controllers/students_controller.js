@@ -1,3 +1,20 @@
+/* Now Script: Using Prisma ORM */
+import prisma from "../prisma.js";
+
+export const getOneStudentById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const getStudent = await prisma.students.findUnique({ where: { id: id } });
+    if (!getStudent) {
+      return res.status(404).json({ message: "Not foud" });
+    }
+    res.status(200).json(getStudent);
+  } catch (err) {
+    res.status(500).json({ message: "Error 500" });
+  }
+};
+
+/* Old Script: Using Prisma ORM */
 import db from "../db.js";
 
 export const createNewStudent = async (req, res) => {
@@ -17,20 +34,20 @@ export const createNewStudent = async (req, res) => {
   }
 };
 
-export const getOneStudentById = async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const query = "select * from students where id = ?";
-    const params = [id];
-    const [[result]] = await db.query(query, params);
-    res.json(result);
-  } catch (err) {
-    res.json({ message: "Error 500, Internal Servere Erro" });
-    console.error(
-      `Error 500, Internal Server Error, From /api/v1/get-one-student EndPoint`,
-    );
-  }
-};
+// export const getOneStudentById = async (req, res) => {
+//   try {
+//     const id = Number(req.params.id);
+//     const query = "select * from students where id = ?";
+//     const params = [id];
+//     const [[result]] = await db.query(query, params);
+//     res.json(result);
+//   } catch (err) {
+//     res.json({ message: "Error 500, Internal Servere Erro" });
+//     console.error(
+//       `Error 500, Internal Server Error, From /api/v1/get-one-student EndPoint`,
+//     );
+//   }
+// };
 
 export const updateOneStudentById = async (req, res) => {
   try {
