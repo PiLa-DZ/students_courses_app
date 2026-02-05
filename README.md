@@ -27,16 +27,6 @@ http delete localhost:3000/api/v1/student-exit-course student_id:=2 course_id:=1
 
 
 
-
-
-
-
-
-
-
-
-
-
 # Database Scripts
 1. **Create students table using mariaDB local terminal**:
     ```SQL
@@ -66,3 +56,24 @@ http delete localhost:3000/api/v1/student-exit-course student_id:=2 course_id:=1
         CONSTRAINT fk_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
     );
     ```
+
+# 🎓 Students & Courses API
+
+A modern RESTful API built with **Node.js**, **Express**, and **Prisma ORM** to manage students, courses, and their enrollments in a MariaDB/MySQL database.
+
+## 🚀 Features
+- **Student Management**: Full CRUD operations for student records.
+- **Course Management**: Create, read, update, and delete course offerings.
+- **Enrollment System**: Manage many-to-many relationships through a specialized join table.
+- **Data Integrity**: Leverages Prisma's type-safety and relational constraints (Foreign Keys).
+
+## 🛠️ Tech Stack
+- **Runtime**: Node.js (v25+)
+- **Framework**: Express.js
+- **ORM**: Prisma (v6 Stable)
+- **Database**: MariaDB / MySQL
+
+## 📋 Prerequisites
+- Node.js installed on your machine.
+- A running MariaDB or MySQL instance.
+
