@@ -14,6 +14,32 @@ export const getOneStudentById = async (req, res) => {
   }
 };
 
+export const updateOneStudentById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { first_name, last_name, user_name, email, age } = req.body;
+
+    const updatedStudent = await prisma.students.update({
+      where: { id: id },
+      data: {
+        first_name,
+        last_name,
+        user_name,
+        email,
+        age: age ? Number(age) : undefined, // Ensure age is a number
+      },
+    });
+
+    res.json(updatedStudent);
+  } catch (err) {
+    if (err.code === "P2025") {
+      return res.status(404).json({ message: "Student not found" });
+    }
+    console.log(`Update Error: ${err.message}`);
+    res.status(500).json({ message: "Error 500" });
+  }
+};
+
 /* Old Script: Using Prisma ORM */
 import db from "../db.js";
 
@@ -49,21 +75,21 @@ export const createNewStudent = async (req, res) => {
 //   }
 // };
 
-export const updateOneStudentById = async (req, res) => {
-  try {
-    const { first_name, last_name, user_name, email, age } = req.body;
-    const id = Number(req.params.id);
-    const query =
-      "update students set first_name = ?, last_name = ?, user_name = ?, email = ?, age = ? where id = ?";
-    const values = [first_name, last_name, user_name, email, age, id];
-    await db.query(query, values);
-    const read = await db.query("select * from students where id = ?", [id]);
-    res.json(read[0][0]);
-  } catch (err) {
-    res.json({ message: "Error 500" });
-    console.log(`From /api/v1/update-one-student ${err.message}`);
-  }
-};
+// export const updateOneStudentById = async (req, res) => {
+//   try {
+//     const { first_name, last_name, user_name, email, age } = req.body;
+//     const id = Number(req.params.id);
+//     const query =
+//       "update students set first_name = ?, last_name = ?, user_name = ?, email = ?, age = ? where id = ?";
+//     const values = [first_name, last_name, user_name, email, age, id];
+//     await db.query(query, values);
+//     const read = await db.query("select * from students where id = ?", [id]);
+//     res.json(read[0][0]);
+//   } catch (err) {
+//     res.json({ message: "Error 500" });
+//     console.log(`From /api/v1/update-one-student ${err.message}`);
+//   }
+// };
 
 export const deleteOneStudentById = async (req, res) => {
   try {
